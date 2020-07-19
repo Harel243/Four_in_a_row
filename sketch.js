@@ -111,81 +111,74 @@ function tie(){
     return true;
 }
 
-function getWinner(){
-    //test horizontal
-    for(j = 0; j < ROWS; j++){
-        for(let i = 0; i <= COLS - 4; i++){
-            const test = board[j][i];
-            if(test != 0){
-                let temp = true;
-                for(let k = 0; k < 4; k++){
-                    if(board[j][i + k] != test)
-                        temp = false;
-                }
-                if(temp == true)
-                return turn;
+function getWinner() {
+    // Test Horizontal
+    for (let j = 0; j < ROWS; j++) {
+      for (let i = 0; i <= COLS - 4; i++) {
+        const test = board[j][i];
+        if (test != 0) {
+          let temp = true;
+          for (let k = 0; k < 4; k++) {
+            if (board[j][i + k] !== test) {
+              temp = false;
             }
+          }
+          if (temp == true) {
+            return turn;
+          }
         }
+      }
     }
-    //test Vertical
-    for(let j = 0; j <= ROWS - 4; j++){
-        for(let i = 0; i < COLS; i++){
-            const test = board[j][i];
-            if(test != 0){
-                let temp = true;
-                for(let k = 0; k < 4; k++){
-                    if(board[j + k][i] != test)
-                        temp = false;
-                }
-                if(temp == true)
-                    return turn;
-            }
-        }
-        // test Diagonal
-        for (let j = 0; j <= ROWS - 4; j++) {
-            for (let i = 0; i <= COLS - 4; i++) {
-                const test = board[j][i];
-                if (test != 0) {
-                    let temp = true;
-                    for (let k = 0; k < 4; k++) {
-                        if (board[j + k][i + k] !== test) 
-                            temp = false;
-                    }
-                    if (temp == true) 
-                        return turn;    
-                }
-            }
-        }
-    }
-    // test Diagonal
+    // Test Vertical
     for (let j = 0; j <= ROWS - 4; j++) {
-        for (let i = 0; i <= COLS - 4; i++) {
-            const test = board[j][i];
-            if (test != 0) {
-                let temp = true;
-                for (let k = 0; k < 4; k++) {
-                    if (board[j + k][i + k] !== test) 
-                        temp = false;
-                }
-                if (temp == true)
-                    return turn;
+      for (let i = 0; i < COLS; i++) {
+        const test = board[j][i];
+        if (test != 0) {
+          let temp = true;
+          for (let k = 0; k < 4; k++) {
+            if (board[j + k][i] !== test) {
+              temp = false;
             }
+          }
+          if (temp == true) {
+            return turn;
+          }
         }
+      }
     }
-    // test Antidiagonal
+    // Test Diagonal
     for (let j = 0; j <= ROWS - 4; j++) {
-        for (let i = 4; i < COLS; i++) {
-            const test = board[j][i];
-            if (test != 0) {
-                let temp = true;
-                for (let k = 0; k < 4; k++) {
-                    if (board[j + k][i - k] !== test) 
-                        temp = false;
-                }
-                if (temp == true) 
-                    return turn;
+      for (let i = 0; i <= COLS - 4; i++) {
+        const test = board[j][i];
+        if (test != 0) {
+          let temp = true;
+          for (let k = 0; k < 4; k++) {
+            if (board[j + k][i + k] !== test) {
+              temp = false;
             }
+          }
+          if (temp == true) {
+            return turn;
+          }
         }
+      }
+    }
+    // Test Antidiagonal
+    for (let j = 0; j <= ROWS - 4; j++) {
+      for (let i = 4; i < COLS; i++) {
+        const test = board[j][i];
+        if (test != 0) {
+          let temp = true;
+          for (let k = 0; k < 4; k++) {
+            if (board[j + k][i - k] !== test) {
+              temp = false;
+            }
+          }
+          if (temp == true) {
+            return turn;
+          }
+        }
+      }
     }
     return null;
-}
+  }
