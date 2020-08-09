@@ -9,7 +9,7 @@ function get_valid_locations() {
   return valid_locations;
 }
 
-function minimax(grid, depth, maximizingPlayer) {
+function minimax(grid, depth, alpha, beta, maximizingPlayer) {
   let valid_locations = get_valid_locations();
   let is_terminal = is_terminal_node();
   if (depth == 0 || is_terminal) {
@@ -27,12 +27,15 @@ function minimax(grid, depth, maximizingPlayer) {
     for (let col of valid_locations) {
       let row = nextSpace(col);
       grid[row][col].type = ai;
-      let new_score = minimax(grid, depth - 1, false)[1];
+      let new_score = minimax(grid, depth - 1, alpha, beta, false)[1];
       if (new_score > value) {
         value = new_score;
         column = col;
       }
       grid[row][col].type = empty;
+      alpha = max(alpha, value);
+      if (alpha >= beta)
+        break;
     }
     return [column, value];
   } else { //Minimizing Player
@@ -41,12 +44,15 @@ function minimax(grid, depth, maximizingPlayer) {
     for (let col of valid_locations) {
       let row = nextSpace(col);
       grid[row][col].type = player;
-      let new_score = minimax(grid, depth - 1, true)[1];
+      let new_score = minimax(grid, depth - 1, alpha, beta, true)[1];
       if (new_score < value) {
         value = new_score;
         column = col;
       }
       grid[row][col].type = empty;
+      beta = min(beta, value);
+      if (alpha >= beta)
+        break;
     }
     return [column, value];
   }

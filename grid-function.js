@@ -96,7 +96,7 @@ function getWinner() {
   }
   // Test Antidiagonal
   for (let j = 0; j <= ROWS - 4; j++) {
-    for (let i = 4; i < COLS; i++) {
+    for (let i = 3; i < COLS; i++) {
       const test = grid[j][i].type;
       if (test != empty) {
         let temp = true;
