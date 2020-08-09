@@ -5,7 +5,10 @@ const PIECE_SIZE = 80;
 
 let grid;
 
-let turn = "red";
+const player = "red";
+const ai = "yellow";
+const empty = "white";
+let turn = player;
 
 function setup() {
   const canvas = createCanvas(COLS * SQUARE_SIZE, ROWS * SQUARE_SIZE + SQUARE_SIZE);
@@ -32,18 +35,30 @@ function draw() {
   fill(turn);
   ellipse((playerPos + 0.5) * SQUARE_SIZE, SQUARE_SIZE / 2, PIECE_SIZE);
 
+
   if (tie())
     tie_screen();
   if (getWinner() != null)
     winner_screen(getWinner());
+
+  if (turn == ai) {
+    let x = minimax(grid, 4, true)[0];
+    let y = nextSpace(x);
+    if (y >= 0) {
+      grid[y][x].type = turn;
+      turn = turn == player ? ai : player;
+    }
+  }
 }
 
 function mousePressed() {
-  let x = floor(mouseX / SQUARE_SIZE);
-  let y = nextSpace(x);
-  if (y >= 0) {
-    grid[y][x].type = turn;
-    turn = turn == "red" ? "yellow" : "red";
+  if (turn == player) {
+    let x = floor(mouseX / SQUARE_SIZE);
+    let y = nextSpace(x);
+    if (y >= 0) {
+      grid[y][x].type = turn;
+      turn = turn == player ? ai : player;
+    }
   }
 }
 
@@ -59,7 +74,6 @@ function tie_screen() {
 }
 
 function winner_screen(winner) {
-  winner = winner == "red" ? "yellow" : "red";
   fill(255);
   rect(-1, -1, width + 2, SQUARE_SIZE);
   fill(winner);

@@ -26,7 +26,7 @@ function drawGrid() {
 
 function nextSpace(x) {
   for (let y = ROWS - 1; y >= 0; y--) {
-    if (grid[y][x].type == "white")
+    if (grid[y][x].type == empty)
       return y;
   }
   return -1;
@@ -35,7 +35,7 @@ function nextSpace(x) {
 function tie() {
   for (let j = 0; j < ROWS; j++) {
     for (let i = 0; i < COLS; i++) {
-      if (grid[j][i].type == "white")
+      if (grid[j][i].type == empty)
         return false;
     }
   }
@@ -47,7 +47,7 @@ function getWinner() {
   for (let j = 0; j < ROWS; j++) {
     for (let i = 0; i <= COLS - 4; i++) {
       const test = grid[j][i].type;
-      if (test != "white") {
+      if (test != empty) {
         let temp = true;
         for (let k = 0; k < 4; k++) {
           if (grid[j][i + k].type !== test) {
@@ -55,7 +55,7 @@ function getWinner() {
           }
         }
         if (temp == true) {
-          return turn;
+          return test;
         }
       }
     }
@@ -64,7 +64,7 @@ function getWinner() {
   for (let j = 0; j <= ROWS - 4; j++) {
     for (let i = 0; i < COLS; i++) {
       const test = grid[j][i].type;
-      if (test != "white") {
+      if (test != empty) {
         let temp = true;
         for (let k = 0; k < 4; k++) {
           if (grid[j + k][i].type !== test) {
@@ -72,7 +72,7 @@ function getWinner() {
           }
         }
         if (temp == true) {
-          return turn;
+          return test;
         }
       }
     }
@@ -81,7 +81,7 @@ function getWinner() {
   for (let j = 0; j <= ROWS - 4; j++) {
     for (let i = 0; i <= COLS - 4; i++) {
       const test = grid[j][i].type;
-      if (test != "white") {
+      if (test != empty) {
         let temp = true;
         for (let k = 0; k < 4; k++) {
           if (grid[j + k][i + k].type !== test) {
@@ -89,7 +89,7 @@ function getWinner() {
           }
         }
         if (temp == true) {
-          return turn;
+          return test;
         }
       }
     }
@@ -98,7 +98,7 @@ function getWinner() {
   for (let j = 0; j <= ROWS - 4; j++) {
     for (let i = 4; i < COLS; i++) {
       const test = grid[j][i].type;
-      if (test != "white") {
+      if (test != empty) {
         let temp = true;
         for (let k = 0; k < 4; k++) {
           if (grid[j + k][i - k].type !== test) {
@@ -106,7 +106,7 @@ function getWinner() {
           }
         }
         if (temp == true) {
-          return turn;
+          return test;
         }
       }
     }
