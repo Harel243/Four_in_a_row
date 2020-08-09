@@ -42,7 +42,7 @@ function draw() {
     winner_screen(getWinner());
 
   if (turn == ai) {
-    let x = minimax(grid, 5, -Infinity, Infinity, true)[0];
+    let x = minimax(grid, 6, -Infinity, Infinity, true)[0];
     let y = nextSpace(x);
     if (y >= 0) {
       grid[y][x].type = turn;
