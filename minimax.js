@@ -122,10 +122,10 @@ function evaluate_score(window, piece) {
     opp_piece = ai;
 
   if (Count(window, piece) == 4) score += 100;
-  else if (Count(window, piece) == 3 && Count(window, empty) == 1) score += 5;
-  else if (Count(window, piece) == 2 && Count(window, empty) == 2) score += 2;
+  else if (Count(window, piece) == 3 && Count(window, empty) == 1) score += 20;
+  else if (Count(window, piece) == 2 && Count(window, empty) == 2) score += 10;
 
-  if (Count(window, opp_piece) == 3 && Count(window, empty) == 1) score -= 4;
+  if (Count(window, opp_piece) == 3 && Count(window, empty) == 1) score -= 5;
 
   return score;
 }
