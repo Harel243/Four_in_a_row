@@ -125,6 +125,7 @@ function evaluate_score(window, piece) {
   else if (Count(window, piece) == 3 && Count(window, empty) == 1) score += 10;
   else if (Count(window, piece) == 2 && Count(window, empty) == 2) score += 5;
 
+  if (Count(window, opp_piece) == 2 && Count(window, empty) == 2) score -= 7;
   if (Count(window, opp_piece) == 3 && Count(window, empty) == 1) score -= 5;
 
   return score;
