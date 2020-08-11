@@ -118,7 +118,7 @@ function evaluate_score(window, piece) {
   let score = 0;
 
   let opp_piece = player;
-  if (piece == player)
+  if (piece === player)
     opp_piece = ai;
 
   if (Count(window, piece) == 4) score += 100;
